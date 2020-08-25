@@ -4,7 +4,7 @@ if (process.env.NODE_ENV !== "production") {
 const express = require("express");
 const app = express();
 var cors = require("cors");
-
+app.use(cors());
 
 var mongoose = require("mongoose");
 var port = process.env.PORT || 3000;
@@ -28,10 +28,10 @@ const Level = require("./models/level");
 
 
 
-app.use(express.json());
-// var bodyParser = require("body-parser");
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: false }));
+//app.use(express.json());
+var bodyParser = require("body-parser");
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 let clients = [];
 
@@ -128,7 +128,7 @@ app.post("/score", authenticateToken, async function (req, res) {
   }
 });
 
-app.use(cors());
+
 
 function authenticateToken(req, res, next) {
   const authHeader = req.headers["authorization"];
