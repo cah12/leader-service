@@ -6,10 +6,7 @@ const app = express();
 var cors = require("cors");
 app.use(cors());
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  next();
-});
+
 
 var mongoose = require("mongoose");
 var port = process.env.PORT || 3000;
@@ -133,7 +130,10 @@ app.post("/score", authenticateToken, async function (req, res) {
   }
 });
 
-
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
 
 function authenticateToken(req, res, next) {
   const authHeader = req.headers["authorization"];
