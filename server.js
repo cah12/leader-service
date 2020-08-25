@@ -1,7 +1,8 @@
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
-
+const express = require("express");
+const app = express();
 var cors = require("cors");
 app.use(cors());
 
@@ -18,8 +19,8 @@ else
     useNewUrlParser: true,
   });
 
-const express = require("express");
-const app = express();
+
+
 const jwt = require("jsonwebtoken");
 const SSE = require("sse");
 
