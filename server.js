@@ -62,6 +62,8 @@ var prepareResponseHeader = function (req, response, next) {
   next();
 };
 
+
+
 app.get("/scoreChanged", prepareResponseHeader, eventsHandler);
 
 // Middleware for GET /scoreChanged endpoint
@@ -92,8 +94,8 @@ function sendEventsToAll(newLeader) {
 
 const levels = ["level_1", "level_2", "level_3", "level_4"];
 
-//gets the current leader
-app.post("/level", prepareResponseHeader, async function (req, res) {
+/* //gets the current leader
+app.post("/level",  async function (req, res) {
   //if(req.cookies)
   //console.log("req.body.levelIndex", req.body);
   try {
@@ -112,6 +114,25 @@ app.post("/level", prepareResponseHeader, async function (req, res) {
       msg: "Database error.",
     });
   }
+}); */
+
+//gets the current leader
+app.post("/level",  async function (req, res) {
+  Level.findOne({ level: levels[req.body.levelIndex] }, (leader, err)=>{
+    if(err){
+      return res.status(501).json({
+        success: false,
+        msg: "Database error.",
+      });
+    }
+    if(!leader){
+      return res.status(501).json({
+        success: false,
+        msg: "Database error.",
+      });
+    }
+    return res.json(leader);
+  })  
 });
 
 app.post("/score", authenticateToken, async function (req, res) {
