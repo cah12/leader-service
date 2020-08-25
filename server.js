@@ -117,7 +117,7 @@ app.post("/level",  async function (req, res) {
 }); */
 
 //gets the current leader
-app.post("/level",  async function (req, res) {
+app.post("/level",  function (req, res) {
   Level.findOne({ level: levels[req.body.levelIndex] }, (leader, err)=>{
     if(err){
       return res.status(501).json({
