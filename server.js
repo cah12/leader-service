@@ -93,7 +93,7 @@ function sendEventsToAll(newLeader) {
 const levels = ["level_1", "level_2", "level_3", "level_4"];
 
 //gets the current leader
-app.post("/level", async function (req, res) {
+app.post("/level", prepareResponseHeader, async function (req, res) {
   //if(req.cookies)
   //console.log("req.body.levelIndex", req.body);
   try {
