@@ -2,6 +2,9 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 
+var cors = require("cors");
+app.use(cors());
+
 var mongoose = require("mongoose");
 var port = process.env.PORT || 3000;
 if (port == 3000)
@@ -21,9 +24,6 @@ const jwt = require("jsonwebtoken");
 const SSE = require("sse");
 
 const Level = require("./models/level");
-
-var cors = require("cors");
-app.use(cors());
 
 app.use(express.json());
 // var bodyParser = require("body-parser");
