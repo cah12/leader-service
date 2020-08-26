@@ -95,11 +95,11 @@ function sendEventsToAll(newLeader) {
 const levels = ["level_1", "level_2", "level_3", "level_4"];
 
 //gets the current leader
-app.get("/level/:levelIndex",  async function (req, res) {
+app.post("/level",  async function (req, res) {
   //if(req.cookies)
-  console.log("req.body.levelIndex", req.params.levelIndex);
+  //console.log("req.body.levelIndex", req.body);
   try {
-    var leader = await Level.findOne({ level: levels[req.params.levelIndex] });
+    var leader = await Level.findOne({ level: levels[req.body.levelIndex] });
     if (!leader) {
       return res.status(501).json({
         success: false,
