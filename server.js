@@ -94,12 +94,12 @@ function sendEventsToAll(newLeader) {
 
 const levels = ["level_1", "level_2", "level_3", "level_4"];
 
-/* //gets the current leader
-app.post("/level",  async function (req, res) {
+//gets the current leader
+app.get("/level/:levelIndex",  async function (req, res) {
   //if(req.cookies)
-  //console.log("req.body.levelIndex", req.body);
+  console.log("req.body.levelIndex", req.params.levelIndex);
   try {
-    var leader = await Level.findOne({ level: levels[req.body.levelIndex] });
+    var leader = await Level.findOne({ level: levels[req.params.levelIndex] });
     if (!leader) {
       return res.status(501).json({
         success: false,
@@ -114,10 +114,10 @@ app.post("/level",  async function (req, res) {
       msg: "Database error.",
     });
   }
-}); */
+}); 
 
 //gets the current leader
-app.post("/level",  function (req, res) {
+/* app.post("/level",  function (req, res) {
   Level.findOne({ level: levels[req.body.levelIndex] }, (leader, err)=>{
     if(err){
       return res.status(501).json({
@@ -133,7 +133,7 @@ app.post("/level",  function (req, res) {
     }
     return res.json(leader);
   })  
-});
+}); */
 
 app.post("/score", authenticateToken, async function (req, res) {
   //console.log(req.user)
