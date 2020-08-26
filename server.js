@@ -48,7 +48,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 let clients = [];
 
 //prepare response header
-var prepareResponseHeader = function (req, response, next) {
+/* var prepareResponseHeader = function (req, response, next) {
   response.writeHead(200, {
     "Content-Type": "text/event-stream",
     "Cache-Control": "no-cache",
@@ -90,7 +90,7 @@ function eventsHandler(req, res) {
 //Iterate clients list and use write res object method to send new leader
 function sendEventsToAll(newLeader) {
   clients.forEach((c) => c.res.write(`data: ${JSON.stringify(newLeader)}\n\n`));
-}
+} */
 
 
 const levels = ["level_1", "level_2", "level_3", "level_4"];
@@ -151,7 +151,7 @@ app.post("/score", authenticateToken, async function (req, res) {
       score: req.body.score,
     };
     //console.log("newLeader", newLeader)
-    sendEventsToAll(newLeader);
+   // sendEventsToAll(newLeader);
     return res.json(newLeader);
   } catch (err) {
     res.status(501).json({
@@ -161,13 +161,6 @@ app.post("/score", authenticateToken, async function (req, res) {
   }
 });
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", '*');
-  res.header("Access-Control-Allow-Credentials", true);
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header("Access-Control-Allow-Headers", 'Origin,X-Requested-With,Content-Type,Accept,content-type,application/json');
-  next();
-}); 
 
 function authenticateToken(req, res, next) {
   const authHeader = req.headers["authorization"];
@@ -185,7 +178,7 @@ var server = app.listen(3000, function () {
   console.log("Listening on port", 3000);
 });
 
-var sse = new SSE(server);
+/* var sse = new SSE(server);
 sse.on("connection", function (client) {
   console.log(111, client);
-});
+}); */
