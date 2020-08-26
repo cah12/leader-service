@@ -4,6 +4,7 @@ if (process.env.NODE_ENV !== "production") {
 const express = require("express");
 const app = express();
 var cors = require("cors");
+app.options("*", cors());
 app.use(cors());
 
 /* app.use(function(req, res, next) {
