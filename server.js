@@ -136,7 +136,7 @@ app.post("/level",  async function (req, res) {
   })  
 }); */
 
-app.post("/score", authenticateToken, async function (req, res) {
+app.post("/score", /* authenticateToken, */ async function (req, res) {
   //console.log(req.user)
   //console.log("req.body.username", req.body.username)
   //set the leader for a particular level
@@ -162,7 +162,7 @@ app.post("/score", authenticateToken, async function (req, res) {
 });
 
 
-function authenticateToken(req, res, next) {
+/* function authenticateToken(req, res, next) {
   const authHeader = req.headers["authorization"];
   const token = authHeader && authHeader.split(" ")[1];
   if (token == null) return res.sendStatus(401);
@@ -172,7 +172,7 @@ function authenticateToken(req, res, next) {
     req.user = user;
     next();
   });
-}
+} */
 
 var server = app.listen(3000, function () {
   console.log("Listening on port", 3000);
