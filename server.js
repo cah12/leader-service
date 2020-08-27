@@ -48,7 +48,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 let clients = [];
 
 //prepare response header
-/* var prepareResponseHeader = function (req, response, next) {
+var prepareResponseHeader = function (req, response, next) {
   response.writeHead(200, {
     "Content-Type": "text/event-stream",
     "Cache-Control": "no-cache",
@@ -90,7 +90,7 @@ function eventsHandler(req, res) {
 //Iterate clients list and use write res object method to send new leader
 function sendEventsToAll(newLeader) {
   clients.forEach((c) => c.res.write(`data: ${JSON.stringify(newLeader)}\n\n`));
-} */
+}
 
 
 const levels = ["level_1", "level_2", "level_3", "level_4"];
@@ -108,7 +108,7 @@ app.post("/level",  async function (req, res) {
       });
     }
     //app.locals.leader = leader.name;
-    return res.json(leader);
+   return res.json(leader);
   } catch (err) {
     res.status(501).json({
       success: false,
@@ -151,7 +151,7 @@ app.post("/score", authenticateToken, async function (req, res) {
       score: req.body.score,
     };
     //console.log("newLeader", newLeader)
-   // sendEventsToAll(newLeader);
+    sendEventsToAll(newLeader);
     return res.json(newLeader);
   } catch (err) {
     res.status(501).json({
@@ -178,7 +178,7 @@ var server = app.listen(3000, function () {
   console.log("Listening on port", 3000);
 });
 
-/* var sse = new SSE(server);
+var sse = new SSE(server);
 sse.on("connection", function (client) {
   console.log(111, client);
-}); */
+});
