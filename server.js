@@ -1,5 +1,5 @@
 if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config();
+  //require("dotenv").config();
 }
 const express = require("express");
 const app = express();
@@ -21,12 +21,12 @@ app.use(cors());
 var mongoose = require("mongoose");
 var port = process.env.PORT || 3000;
 if (process.env.NODE_ENV !== "production")
-  mongoose.connect(process.env.LOCAL_DATABASE_URL, {
+  mongoose.connect("mongodb://localhost/myappdatabase", {
     useUnifiedTopology: true,
     useNewUrlParser: true,
   });
 else
-  mongoose.connect(process.env.DATABASE_URL, {
+  mongoose.connect("mongodb://cahuser:cahuser@ds023468.mlab.com:23468/cahuserdb", {
     useUnifiedTopology: true,
     useNewUrlParser: true,
   });
