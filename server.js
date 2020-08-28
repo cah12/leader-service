@@ -18,7 +18,7 @@ app.use(cors());
 
 
 
-var mongoose = require("mongoose");
+/* var mongoose = require("mongoose");
 var port = process.env.PORT || 3000;
 if (process.env.NODE_ENV !== "production")
   mongoose.connect("mongodb://localhost/myappdatabase", {
@@ -36,12 +36,12 @@ else
 const jwt = require("jsonwebtoken");
 const SSE = require("sse");
 
-const Level = require("./models/level");
+const Level = require("./models/level"); */
 
 
 
 //app.use(express.json());
-var bodyParser = require("body-parser");
+/* var bodyParser = require("body-parser");
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -93,50 +93,33 @@ function sendEventsToAll(newLeader) {
 }
 
 
-const levels = ["level_1", "level_2", "level_3", "level_4"];
+const levels = ["level_1", "level_2", "level_3", "level_4"]; */
 
 //gets the current leader
 app.post("/level",  async function (req, res) {
   //if(req.cookies)
   //console.log("req.body.levelIndex", req.body);
-  try {
+  /* try {
     var leader = await Level.findOne({ level: levels[req.body.levelIndex] });
     if (!leader) {
       return res.status(501).json({
         success: false,
         msg: "Database error.",
       });
-    }
+    } */
     //app.locals.leader = leader.name;
-   return res.json(leader);
-  } catch (err) {
+   //return res.json(leader);
+   return res.json({"name": "Testing"});
+  /* } catch (err) {
     res.status(501).json({
       success: false,
       msg: "Database error.",
     });
-  }
+  } */
 }); 
 
-//gets the current leader
-/* app.post("/level",  function (req, res) {
-  Level.findOne({ level: levels[req.body.levelIndex] }, (leader, err)=>{
-    if(err){
-      return res.status(501).json({
-        success: false,
-        msg: "Database error.",
-      });
-    }
-    if(!leader){
-      return res.status(501).json({
-        success: false,
-        msg: "Database error.",
-      });
-    }
-    return res.json(leader);
-  })  
-}); */
 
-app.post("/score", /* authenticateToken, */ async function (req, res) {
+/* app.post("/score", authenticateToken, async function (req, res) {
   //console.log(req.user)
   //console.log("req.body.username", req.body.username)
   //set the leader for a particular level
@@ -159,7 +142,7 @@ app.post("/score", /* authenticateToken, */ async function (req, res) {
       msg: "Database error.",
     });
   }
-});
+}); */
 
 
 /* function authenticateToken(req, res, next) {
@@ -172,13 +155,13 @@ app.post("/score", /* authenticateToken, */ async function (req, res) {
     req.user = user;
     next();
   });
-} */
+}  */
 
 var server = app.listen(3000, function () {
   console.log("Listening on port", 3000);
 });
 
-var sse = new SSE(server);
+/* var sse = new SSE(server);
 sse.on("connection", function (client) {
   console.log(111, client);
-});
+}); */
